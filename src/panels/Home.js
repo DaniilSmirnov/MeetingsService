@@ -38,12 +38,9 @@ class Home extends Component {
 
                 <Group>
                     {this.state.meets.map((item, key) => (
-                        <div className="meeting" key={key}>
-
-                            {item.name}
-
-							{item.description}
-
+                        <div className="Meeting" key={key}>
+                            <div className="Meeting__name">{item.name}</div>
+                            <div className="Meeting__description">{item.description}</div>
                         </div>
                     ))}
                 </Group>
@@ -66,4 +63,3 @@ Home.propTypes = {
 };
 
 export default Home;
-
