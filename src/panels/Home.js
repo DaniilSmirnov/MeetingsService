@@ -5,21 +5,13 @@ import { View,Panel,PanelHeader, Group } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import axios from 'axios';
 
-class Render extends Component {
-    constructor(props){
+class Home extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
             meets: []
         };
-    }
-
-
-}
-
-class Home extends Component {
-    constructor(props) {
-        super(props);
 
         this.apiRequest('GetMeets',(result) => {
             this.setState({ meets: result });
@@ -38,6 +30,7 @@ class Home extends Component {
 
     render() {
         let {id, go, fetchedUser} = this.props;
+
         return (
             <Panel id={id}>
                 <PanelHeader>Example</PanelHeader>
@@ -54,4 +47,18 @@ class Home extends Component {
     }
 }
 
+Home.propTypes = {
+    id: PropTypes.string.isRequired,
+    go: PropTypes.func.isRequired,
+    fetchedUser: PropTypes.shape({
+        photo_200: PropTypes.string,
+        first_name: PropTypes.string,
+        last_name: PropTypes.string,
+        city: PropTypes.shape({
+            title: PropTypes.string,
+        }),
+    }),
+};
+
 export default Home;
+
