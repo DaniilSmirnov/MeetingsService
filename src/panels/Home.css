@@ -1,8 +1,6 @@
 .Meeting {
+    padding: 5px;
     margin: 5px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #000000;
 }
 
 .Meeting__name {
@@ -11,6 +9,6 @@
     margin-bottom: 10px;
 }
 
-.Meeting__description {
+.Meeting__members {
    font-size: 16px;
 }

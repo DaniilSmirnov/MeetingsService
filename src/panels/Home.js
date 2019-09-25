@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import connect from '@vkontakte/vkui-connect';
 import PropTypes from 'prop-types';
-import { View,Panel,PanelHeader, Group } from '@vkontakte/vkui';
+import { View,Panel,PanelHeader, Group, Button, Div, ModalCard } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import axios from 'axios';
 import './Home.css';
@@ -34,16 +34,16 @@ class Home extends Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader>Example</PanelHeader>
+                <PanelHeader>Диванные митинги</PanelHeader>
 
-                <Group>
                     {this.state.meets.map((item, key) => (
-                        <div className="Meeting" key={key}>
-                            <div className="Meeting__name">{item.name}</div>
-                            <div className="Meeting__description">{item.description}</div>
-                        </div>
+                        <Group className="Meeting" key={key}>
+                            <Div className="Meeting__name">{item.name}</Div>
+                            <Div className="Meeting__members">{item.members_amount} участников</Div>
+                            <Button level ="commerce">Участвовать</Button>
+                        </Group>
                     ))}
-                </Group>
+
             </Panel>
         );
     }
