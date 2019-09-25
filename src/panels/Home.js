@@ -6,59 +6,52 @@ import '@vkontakte/vkui/dist/vkui.css';
 import axios from 'axios';
 
 class Render extends Component {
-	constructor(props){
-		super(props);
+    constructor(props){
+        super(props);
 
-		this.state = {};
-		//this.RenderMeets = this.RenderMeets().bind(this);
-	}
+        this.state = {
+            meets: []
+        };
+    }
 
 
 }
 
 class Home extends Component {
-	RenderMeets() {
-		axios.get('http://127.0.0.1:5000/GetMeets')
-			.then(function (response) {
-				console.log(response);
-				return (response.map(meet => (<div>{meet.name}</div>)))
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			});
+    constructor(props) {
+        super(props);
 
+        this.apiRequest('GetMeets',(result) => {
+            this.setState({ meets: result });
+        });
+    }
 
+    apiRequest = (method, callbackFunction) => {
+        axios.get('http://127.0.0.1:5000/'+method)
+            .then((result) => {
+                callbackFunction(result.data);
+            })
+            .catch((error) => {
+                console.error('API Error', error);
+            });
+    };
 
-	}
+    render() {
+        let {id, go, fetchedUser} = this.props;
+        return (
+            <Panel id={id}>
+                <PanelHeader>Example</PanelHeader>
 
-	render() {
-		let {id, go, fetchedUser} = this.props;
-		return (
-			<Panel id={id}>
-				<PanelHeader>Example</PanelHeader>
-
-				<Group>
-					{this.RenderMeets()}
-				</Group>
-
-			</Panel>
-		);
-	}
+                <Group>
+                    {this.state.meets.map((item, key) => (
+                        <div key={key}>
+                            {item.name}
+                        </div>
+                    ))}
+                </Group>
+            </Panel>
+        );
+    }
 }
 
-Home.propTypes = {
-	id: PropTypes.string.isRequired,
-	go: PropTypes.func.isRequired,
-	fetchedUser: PropTypes.shape({
-		photo_200: PropTypes.string,
-		first_name: PropTypes.string,
-		last_name: PropTypes.string,
-		city: PropTypes.shape({
-			title: PropTypes.string,
-		}),
-	}),
-};
-
 export default Home;
-
