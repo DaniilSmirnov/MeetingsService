@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { View,Panel,PanelHeader, Group } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import axios from 'axios';
+import './Home.css';
 
 class Home extends Component {
     constructor(props) {
@@ -37,8 +38,12 @@ class Home extends Component {
 
                 <Group>
                     {this.state.meets.map((item, key) => (
-                        <div key={key}>
+                        <div className="meeting" key={key}>
+
                             {item.name}
+
+							{item.description}
+
                         </div>
                     ))}
                 </Group>
