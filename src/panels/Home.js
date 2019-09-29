@@ -38,9 +38,9 @@ class Home extends Component {
 
                     {this.state.meets.map((item, key) => (
                         <Group className="Meeting" key={key}>
-                            <Div className="Meeting__name">{item.name}</Div>
-                            <Div className="Meeting__members">{item.members_amount} участников</Div>
-                            <Button level ="commerce">Участвовать</Button>
+                            <Div className="Meeting_name">{item.name}</Div>
+                            <Button className = "Meeting_info" level ="outline">Участвовать</Button>
+                            <Div className="Meeting_info">{item.members_amount} участников</Div>
                         </Group>
                     ))}
 
