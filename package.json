@@ -1,11 +1,11 @@
 {
-  "name": "VKApp",
+  "name": "vk-apps-meetings",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 react-scripts start",
-    "build": "react-scripts build"
+    "build": "set \"PUBLIC_URL=/devApp/\" && set \"GENERATE_SOURCEMAP=false\" && react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,7 @@
     "@vkontakte/icons": "^1.8.2",
     "@vkontakte/vk-connect": "^1.5.5",
     "@vkontakte/vkui": "^2.28.2",
-    "@vkontakte/vkui-connect": "^1.5.4",
+    "axios": "^0.19.0",
     "babel-eslint": "^9.0.0",
     "chalk": "^2.4.2",
     "core-js": "^3.1.4",
