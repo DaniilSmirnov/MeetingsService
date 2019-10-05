@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { dd } from './helpers';
+import { dd, sleep } from './helpers';
 
 const API_URL 			= 'https://127.0.0.1:5000/';
 const VK_DATA 			= window.location.search;
@@ -60,6 +60,8 @@ export default class API {
             start: 123123123,
             finish: 321321321
         }];
+
+        await sleep(1000);
 
         dd('API: ', 'GetMeets', meets);
         return meets;

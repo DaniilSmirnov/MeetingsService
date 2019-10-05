@@ -25,9 +25,7 @@ class Meet extends Component {
         this.api = this.props.api;
     }
 
-    componentDidMount() {
-        dd('Panel: ', 'Meet');
-    }
+    componentDidMount() {}
 
     render() {
         const { id } = this.props;

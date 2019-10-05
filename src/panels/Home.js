@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Panel,PanelHeader } from '@vkontakte/vkui';
+import { Panel,PanelHeader, ScreenSpinner } from '@vkontakte/vkui';
 import { dd, getMessage } from '../js/helpers';
 import MeetList from '../components/MeetList';
 
@@ -19,27 +19,31 @@ class Home extends Component {
 
     componentDidMount() {
         this.getMeets();
-
-        dd('Panel: ', 'Home');
     }
 
     getMeets = async (page, count, search) => {
+        window.showLoader(true);
+
         const meets = await this.api.GetMeets();
 
         this.setState({ meets });
+        window.showLoader(false);
     }
 
     render() {
-        const { id, setParentState } = this.props;
+        const { id, state, setParentState } = this.props;
 
         return (
             <Panel id={id}>
                 <PanelHeader>{ getMessage('home_panel_title') }</PanelHeader>
 
-                <MeetList
-                    meets={ this.state.meets }
-                    setParentState={ setParentState }
-                />
+                {
+                    !state.popout && 
+                        <MeetList
+                            meets={ this.state.meets }
+                            setParentState={ setParentState }
+                        />
+                }
             </Panel>
         );
     }

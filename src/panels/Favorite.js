@@ -19,27 +19,31 @@ class Favorite extends Component {
 
     componentDidMount() {
         this.getMeets();
-
-        dd('Panel: ', 'Home');
     }
 
     getMeets = async (page, count, search) => {
+        window.showLoader(true);
+
         const meets = await this.api.GetMeets();
 
         this.setState({ meets });
+        window.showLoader(false);
     }
 
     render() {
-        const { id, setParentState } = this.props;
+        const { id, state, setParentState } = this.props;
 
         return (
             <Panel id={id}>
                 <PanelHeader>{ getMessage('favorite_panel_title') }</PanelHeader>
 
-                <MeetList
-                    meets={ this.state.meets }
-                    setParentState={ setParentState }
-                />
+                {
+                    !state.popout && 
+                        <MeetList
+                            meets={ this.state.meets }
+                            setParentState={ setParentState }
+                        />
+                }
             </Panel>
         );
     }

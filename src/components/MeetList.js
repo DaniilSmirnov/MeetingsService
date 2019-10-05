@@ -12,24 +12,24 @@ class MeetList extends Component {
         return (
             <Group className="transparentBody MeetList">
                 {
-                    meets.length ? 
-                    <>
-                        {
-                            meets.map((meet, index) => <MeetBox 
-                                key={index}
-                                meet={meet}
-                                setParentState={setParentState}
-                            />)
-                        }
+                    (meets && meets.length) ? 
+                        <>
+                            {
+                                meets.map((meet, index) => <MeetBox 
+                                    key={index}
+                                    meet={meet}
+                                    setParentState={setParentState}
+                                />)
+                            }
 
-                        <Div align="center">
-                            <Button className="load-more">Показать ещё</Button>
-                        </Div>
-                    </>
-                    :
-                    <Group>
-                        <Div>{ getMessage('meet_empty_list') }</Div>
-                    </Group>
+                            <Div align="center">
+                                <Button className="load-more">Показать ещё</Button>
+                            </Div>
+                        </>
+                        :
+                        <Group>
+                            <Div>{ getMessage('meet_empty_list') }</Div>
+                        </Group>
                 }
             </Group>
         )
