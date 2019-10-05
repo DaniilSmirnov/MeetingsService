@@ -1,3 +1,8 @@
+import { messages } from "./messages";
+
+export const isDev = (window.location.hash === '#debug') ? true : false;
+export const isLocal = (window.location.port === '10888') ? true : false;
+
 export const sleep = async (time) => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -17,3 +22,24 @@ export const initLazyLoad = () => {
         }
     };
 };
+
+export const getMessage = (k, d) => {
+    if (messages && messages[k]) {
+        return messages[k];
+    } else {
+        return d || '!message';
+    }
+}
+
+export const showAlert = (status, message) => {
+    // code show alert
+}
+
+export const showAlertByErrorCode = (code) => {
+    console.log('Error: ', getMessage(code));
+    // showAlert('error', getMessage(code));
+}
+
+export const dd = (...m) => {
+    console.log(...m);
+}

@@ -6,7 +6,7 @@ import MeetList from '../components/MeetList';
 import '@vkontakte/vkui/dist/vkui.css';
 import './Home.css';
 
-class Home extends Component {
+class Favorite extends Component {
     constructor(props) {
         super(props);
 
@@ -34,7 +34,7 @@ class Home extends Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader>{ getMessage('home_panel_title') }</PanelHeader>
+                <PanelHeader>{ getMessage('favorite_panel_title') }</PanelHeader>
 
                 <MeetList
                     meets={ this.state.meets }
@@ -45,4 +45,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Favorite;

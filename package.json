@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 react-scripts start",
-    "build": "set \"PUBLIC_URL=/devApp/\" && set \"GENERATE_SOURCEMAP=false\" && react-scripts build"
+    "build": "set \"PUBLIC_URL=/vk-apps-meetings/\" && set \"GENERATE_SOURCEMAP=false\" && react-scripts build"
   },
   "keywords": [],
   "author": "",

@@ -3,14 +3,16 @@ import connect from '@vkontakte/vk-connect';
 import { View, platform, ANDROID, Alert, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
 
 import '@vkontakte/vkui/dist/vkui.css';
+import './css/App.css';
 
-// import API from './js/api';
-// import { sleep } from './js/helpers';
+import API from './js/api';
 
-import Icon24Note from '@vkontakte/icons/dist/24/note';
-import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
+import Icon24List from '@vkontakte/icons/dist/24/list';
+import Icon24FavoriteOutline from '@vkontakte/icons/dist/24/favorite_outline';
 
 import Home from './panels/Home';
+import Favorite from './panels/Favorite';
+import Meet from './panels/Meet';
 
 
 const osname = platform();
@@ -30,6 +32,8 @@ class App extends React.Component {
 			disable: false,
 			loader: null
 		};
+
+		this.api = new API();
 
 		this.onStoryChange 	= this.onStoryChange.bind(this);
 	}
@@ -83,18 +87,40 @@ class App extends React.Component {
 					<TabbarItem
 						onClick={ () => this.onStoryChange('home', 'meets') }
 						selected={ this.state.activeStory === 'home' }
-						text="Главная"
-					><Icon24Note /></TabbarItem>
+					><Icon24List /></TabbarItem>
 					<TabbarItem
 						onClick={ () => this.onStoryChange('favorites', 'list') }
 						selected={ this.state.activeStory === 'favorites' }
-						text="Поиск"
-					><Icon24Favorite /></TabbarItem>
+					><Icon24FavoriteOutline /></TabbarItem>
 				</Tabbar>
 			}>
 				<View id="home" activePanel={ this.state.activePanel }>
 					<Home 
 						id="meets"
+						api={ this.api }
+						state={ this.state }
+						setParentState={ this.setState.bind(this) }
+						fetchedUser={ this.state.fetchedUser }
+					/>
+					<Meet 
+						id="meet"
+						api={ this.api }
+						state={ this.state }
+						setParentState={ this.setState.bind(this) }
+						fetchedUser={ this.state.fetchedUser }
+					/>
+				</View>
+				<View id="favorites" activePanel={ this.state.activePanel }>
+					<Favorite 
+						id="list"
+						api={ this.api }
+						state={ this.state }
+						setParentState={ this.setState.bind(this) }
+						fetchedUser={ this.state.fetchedUser }
+					/>
+					<Meet 
+						id="meet"
+						api={ this.api }
 						state={ this.state }
 						setParentState={ this.setState.bind(this) }
 						fetchedUser={ this.state.fetchedUser }

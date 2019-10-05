@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { dd } from './helpers';
 
 const API_URL 			= 'https://127.0.0.1:5000/';
 const VK_DATA 			= window.location.search;
@@ -10,6 +11,10 @@ axios.defaults.headers.common = {
 
 export default class API {
     
+    constructor() {
+        dd('API: ', 'init');
+    }
+
     async send(type = 'GET', action, params = {}) {
         if (!navigator.onLine) {
             // error internet connection
@@ -28,7 +33,37 @@ export default class API {
     }
 
     async AddMeet() {}
-    async GetMeets() {}
+
+    async GetMeets() {
+        const meets = [{
+            id: 1,
+            name: 'Meet name 1',
+            description: 'Meet description 1',
+            ownerid: 1,
+            members_amount: 1,
+            start: 123123123,
+            finish: 321321321
+        },{
+            id: 2,
+            name: 'Meet name 2',
+            description: 'Meet description 2',
+            ownerid: 1,
+            members_amount: 1,
+            start: 123123123,
+            finish: 321321321
+        },{
+            id: 3,
+            name: 'Meet name 3',
+            description: 'Meet description 3',
+            ownerid: 1,
+            members_amount: 1,
+            start: 123123123,
+            finish: 321321321
+        }];
+
+        dd('API: ', 'GetMeets', meets);
+        return meets;
+    }
     async AddMeetMember() {}
     async RemoveMeetMember() {}
     async AuthUser() {}
