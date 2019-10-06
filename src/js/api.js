@@ -110,8 +110,8 @@ export default class API {
         
         await this.send();
 
-        dd('API: ', 'GetMeetsComments', meets);
-        return meets;
+        dd('API: ', 'GetMeetsComments', comments);
+        return comments;
     }
 
     async RemoveComment() {}
