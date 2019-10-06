@@ -86,7 +86,33 @@ export default class API {
 
     async AddComment() {}
 
-    async GetMeetComments() {}
+    async GetMeetComments() {
+    const comments = [
+        {
+            "id": 1,
+            "comment": "Комментарий 1",
+            "ownerid": 1,
+            "meetingid": 1
+        },
+        {
+            "id": 2,
+            "comment": "Комментарий 2",
+            "ownerid": 12,
+            "meetingid": 1
+        },
+        {
+            "id": 3,
+            "comment": "Комментарий 3",
+            "ownerid": 13,
+            "meetingid": 1
+        }
+        ];
+        
+        await this.send();
+
+        dd('API: ', 'GetMeetsComments', meets);
+        return meets;
+    }
 
     async RemoveComment() {}
 
