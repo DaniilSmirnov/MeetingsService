@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { Panel,PanelHeader, ScreenSpinner } from '@vkontakte/vkui';
-import { dd, getMessage } from '../js/helpers';
+import { Panel, PanelHeader, HeaderButton } from '@vkontakte/vkui';
+import { getMessage } from '../js/helpers';
 import MeetList from '../components/MeetList';
 
+import Icon24Add from '@vkontakte/icons/dist/24/add';
 import '@vkontakte/vkui/dist/vkui.css';
 import './Home.css';
 
@@ -22,12 +23,9 @@ class Home extends Component {
     }
 
     getMeets = async (page, count, search) => {
-        window.showLoader(true);
-
         const meets = await this.api.GetMeets();
 
         this.setState({ meets });
-        window.showLoader(false);
     }
 
     render() {
@@ -35,7 +33,13 @@ class Home extends Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader>{ getMessage('home_panel_title') }</PanelHeader>
+                <PanelHeader
+                    left={<HeaderButton onClick={() => {
+                        setParentState({
+                            activeModal: "add-meet-modal"
+                        });
+                    }}>{<Icon24Add />}</HeaderButton>}
+                >{ getMessage('home_panel_title') }</PanelHeader>
 
                 {
                     !state.popout && 

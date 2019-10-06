@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Panel,PanelHeader } from '@vkontakte/vkui';
-import { dd, getMessage } from '../js/helpers';
+import { getMessage } from '../js/helpers';
 import MeetList from '../components/MeetList';
 
 import '@vkontakte/vkui/dist/vkui.css';
@@ -22,12 +22,9 @@ class Favorite extends Component {
     }
 
     getMeets = async (page, count, search) => {
-        window.showLoader(true);
-
         const meets = await this.api.GetMeets();
 
         this.setState({ meets });
-        window.showLoader(false);
     }
 
     render() {

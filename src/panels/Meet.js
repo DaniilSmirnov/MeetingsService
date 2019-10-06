@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Panel, PanelHeader, Div, Group, Separator, Button } from '@vkontakte/vkui';
-import { dd } from '../js/helpers';
 
 // import Icon24Users from '@vkontakte/icons/dist/24/users';
 // import Icon24ShareOutline from '@vkontakte/icons/dist/24/share_outline';

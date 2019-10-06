@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from '@vkontakte/vk-connect';
-import { View, Epic, Tabbar, TabbarItem, ScreenSpinner } from '@vkontakte/vkui';
+import { View, Epic, Tabbar, TabbarItem, ScreenSpinner, ModalRoot } from '@vkontakte/vkui';
 
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/App.css';
@@ -15,6 +15,7 @@ import Home from './panels/Home';
 import Favorite from './panels/Favorite';
 import Meet from './panels/Meet';
 import Offline from './panels/Offline';
+import AddMeetModal from './components/modals/AddMeetModal';
 
 class App extends React.Component {
 	constructor(props) {
@@ -23,6 +24,7 @@ class App extends React.Component {
 		this.state = {
 			activeStory: 'home',
 			activePanel: 'meets',
+			activeModal: null,
 			
 			fetchedUser: null,
 
@@ -79,60 +81,49 @@ class App extends React.Component {
 	}
 
 	render() {
+		const { api, state } = this;
+		const { offline, popout, activeStory, activePanel, activeModal, fetchedUser } = this.state;
+		const props = { api, state, fetchedUser, setParentState: this.setState.bind(this) };
+
+		const modal = (
+            <ModalRoot activeModal={ activeModal }>
+                <AddMeetModal
+					id="add-meet-modal"
+					{ ...props }
+					onClose={ () => this.setState({ activeModal: null }) }
+				/>
+            </ModalRoot>
+		);
+
+		const views = { modal, popout, activePanel };
+
 		return (
 			<>
 				{
-					this.state.offline ?
-						<View id="offline" popout={this.state.popout} activePanel="offline">
-							<Offline
-								id="offline"
-								setParentState={ this.setState.bind(this) }
-							/>
+					offline ?
+						<View id="offline" popout={ popout } activePanel="offline">
+							<Offline id="offline" { ...props } />
 						</View>
 						:
-						<Epic activeStory={ this.state.activeStory } tabbar={
+						<Epic activeStory={ activeStory } tabbar={
 							<Tabbar>
 								<TabbarItem
 									onClick={ () => this.onStoryChange('home', 'meets') }
-									selected={ this.state.activeStory === 'home' }
+									selected={ activeStory === 'home' }
 								><Icon24List /></TabbarItem>
 								<TabbarItem
 									onClick={ () => this.onStoryChange('favorites', 'list') }
-									selected={ this.state.activeStory === 'favorites' }
+									selected={ activeStory === 'favorites' }
 								><Icon24FavoriteOutline /></TabbarItem>
 							</Tabbar>
 						}>
-							<View id="home" popout={this.state.popout} activePanel={ this.state.activePanel }>
-								<Home 
-									id="meets"
-									api={ this.api }
-									state={ this.state }
-									setParentState={ this.setState.bind(this) }
-									fetchedUser={ this.state.fetchedUser }
-								/>
-								<Meet 
-									id="meet"
-									api={ this.api }
-									state={ this.state }
-									setParentState={ this.setState.bind(this) }
-									fetchedUser={ this.state.fetchedUser }
-								/>
+							<View id="home" { ...views } >
+								<Home id="meets" { ...props } />
+								<Meet id="meet" { ...props } />
 							</View>
-							<View id="favorites" popout={this.state.popout} activePanel={ this.state.activePanel }>
-								<Favorite 
-									id="list"
-									api={ this.api }
-									state={ this.state }
-									setParentState={ this.setState.bind(this) }
-									fetchedUser={ this.state.fetchedUser }
-								/>
-								<Meet 
-									id="meet"
-									api={ this.api }
-									state={ this.state }
-									setParentState={ this.setState.bind(this) }
-									fetchedUser={ this.state.fetchedUser }
-								/>
+							<View id="favorites" { ...views } >
+								<Favorite id="list" { ...props } />
+								<Meet id="meet" { ...props }/>
 							</View>
 						</Epic>
 				}

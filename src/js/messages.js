@@ -9,4 +9,15 @@ export const messages = {
     home_panel_title: "Диванные митинги",
     favorite_panel_title: "Избранные",
     meet_empty_list: "Пусто",
+
+    add_meet_modal: "Добавление митинга",
+    edit_meet_modal: "Редактирование митинга",
+
+    forms: {
+        name: "Название",
+        description: "Описание",
+        add: "Добавить",
+        save: "Сохранить",
+        submit: "Отправить"
+    }
 };

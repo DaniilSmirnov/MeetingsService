@@ -1,7 +1,11 @@
 import axios from 'axios';
-import { dd, sleep } from './helpers';
+import {
+    dd,
+    sleep,
+    // getMessage
+} from './helpers';
 
-const API_URL 			= 'https://127.0.0.1:5000/';
+// const API_URL 			= 'https://127.0.0.1:5000/';
 const VK_DATA 			= window.location.search;
 
 axios.defaults.headers.common = {
@@ -21,15 +25,22 @@ export default class API {
             return false;
         }
 
-        return await axios({
-            method: type,
-            url: `${API_URL}${action}`,
-            data: { params }
-        })
-            .catch(error => {
-                console.log('Error API:', error);
-                // window.showAlert('Сервер не отвечает.');
-            });
+        window.showLoader(true);
+
+        await sleep(1000);
+
+        // const response = await axios({
+        //     method: type,
+        //     url: `${API_URL}${action}`,
+        //     data: { params }
+        // }).catch(error => {
+        //     dd('Error API:', error);
+        //     window.showAlert(getMessage('server_offline'));
+        // });
+
+        window.showLoader(false);
+
+        // return response;
     }
 
     async AddMeet() {}
@@ -61,19 +72,28 @@ export default class API {
             finish: 321321321
         }];
 
-        await sleep(1000);
+        await this.send();
 
         dd('API: ', 'GetMeets', meets);
         return meets;
     }
+
     async AddMeetMember() {}
+
     async RemoveMeetMember() {}
+
     async AuthUser() {}
+
     async AddComment() {}
+
     async GetMeetComments() {}
+
     async RemoveComment() {}
+
     async ApproveMeet() {}
+
     async DeApproveMeet() {}
+
     async GetAllMeets() {}
 
 }
