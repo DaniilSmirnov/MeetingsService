@@ -12,6 +12,7 @@ export const messages = {
 
     add_meet_modal: "Добавление митинга",
     edit_meet_modal: "Редактирование митинга",
+    add_meet_success: "Успешно добавлен",
 
     forms: {
         name: "Название",

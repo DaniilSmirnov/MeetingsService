@@ -25,8 +25,6 @@ export default class API {
             return false;
         }
 
-        window.showLoader(true);
-
         await sleep(1000);
 
         // const response = await axios({
@@ -38,30 +36,20 @@ export default class API {
         //     window.showAlert(getMessage('server_offline'));
         // });
 
-        window.showLoader(false);
-
         // return response;
     }
 
-    async AddMeet() {
+    async AddMeet(meet) {
 
         const response = {
-            success: true
+            success: true,
+            failed: "test test"
         }
 
-        // const response = {
-        //     success: false,
-        //     failed: "Текст ошибки"
-        // }
-
-        // const { success } = await this.send();
-        await this.send();
-        
-        // if (success) {}
-
-        dd('API: ', 'GetMeetsComments', response);
-        return response.success;
-
+        dd('API: ', 'AddMeet', response);
+        await this.send('POST', 'AddMeet', meet);
+        // return await this.send('POST', 'AddMeet', meet);
+        return response;
     }
 
     async GetMeets() {

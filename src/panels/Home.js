@@ -23,9 +23,11 @@ class Home extends Component {
     }
 
     getMeets = async (page, count, search) => {
+        window.showLoader(true);
         const meets = await this.api.GetMeets();
 
         this.setState({ meets });
+        window.showLoader(false);
     }
 
     render() {
