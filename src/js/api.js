@@ -43,7 +43,26 @@ export default class API {
         // return response;
     }
 
-    async AddMeet() {}
+    async AddMeet() {
+
+        const response = {
+            success: true
+        }
+
+        // const response = {
+        //     success: false,
+        //     failed: "Текст ошибки"
+        // }
+
+        // const { success } = await this.send();
+        await this.send();
+        
+        // if (success) {}
+
+        dd('API: ', 'GetMeetsComments', response);
+        return response.success;
+
+    }
 
     async GetMeets() {
         const meets = [{
