@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import { Panel, PanelHeader, HeaderButton } from '@vkontakte/vkui';
+import { Panel,PanelHeader } from '@vkontakte/vkui';
 import { getMessage } from '../js/helpers';
 import MeetList from '../components/MeetList';
 
-import Icon24Add from '@vkontakte/icons/dist/24/add';
 import '@vkontakte/vkui/dist/vkui.css';
 import './Home.css';
 
-class Home extends Component {
+class Favorite extends Component {
     constructor(props) {
         super(props);
 
@@ -35,13 +34,7 @@ class Home extends Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader
-                    left={<HeaderButton onClick={() => {
-                        setParentState({
-                            activeModal: "add-meet-modal"
-                        });
-                    }}>{<Icon24Add />}</HeaderButton>}
-                >{ getMessage('home_panel_title') }</PanelHeader>
+                <PanelHeader>{ getMessage('favorite_panel_title') }</PanelHeader>
 
                 {
                     !state.popout && 
@@ -55,4 +48,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Favorite;
