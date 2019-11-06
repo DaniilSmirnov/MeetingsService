@@ -76,6 +76,7 @@ class App extends React.Component {
 		connect.send('VKWebAppGetUserInfo', {});
 	}
 
+	// TODO: Нужен history для навигации назад с других экранов и системной кнопки назад на ведре
 	onStoryChange = (story, panel) => {
 		this.setState({ activeStory: story, activePanel: panel });
 	}
@@ -87,6 +88,7 @@ class App extends React.Component {
 
 		const modal = (
             <ModalRoot activeModal={ activeModal }>
+				{/* TODO: отказаться от моадлки, лучше отдельный экран, меньше проблем с ресайзом */}
                 <AddMeetModal
 					id="add-meet-modal"
 					{ ...props }

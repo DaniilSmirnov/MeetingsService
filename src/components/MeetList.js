@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Group, Div, Button } from '@vkontakte/vkui';
+import { Group, Div } from '@vkontakte/vkui';
 
 import MeetBox from './MeetBox';
 import { getMessage } from '../js/helpers';
@@ -21,10 +21,6 @@ class MeetList extends Component {
                                     setParentState={setParentState}
                                 />)
                             }
-
-                            <Div align="center">
-                                <Button className="load-more">Показать ещё</Button>
-                            </Div>
                         </>
                         :
                         <Group>

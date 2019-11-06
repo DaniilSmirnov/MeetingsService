@@ -17,7 +17,7 @@ export class Offline extends React.Component {
 
     render() {
         return (
-            <Panel id="offline" theme="white"> //PlaceHolder Оффлайн
+            <Panel id="offline" theme="white"> {/* PlaceHolder Оффлайн */}
                 <Div>
                     <Div>offline</Div>
                     

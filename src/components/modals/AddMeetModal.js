@@ -20,6 +20,7 @@ const meetExaple = {
     description: ''
 };
 
+// TODO: Превратить в отдельную страницу а не модалку 
 class AddMeetModal extends React.Component {
 
     constructor(props) {

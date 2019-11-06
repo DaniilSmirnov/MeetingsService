@@ -1,11 +1,11 @@
 import axios from 'axios';
 import {
     dd,
-    sleep,
-    // getMessage
+    // sleep,
+    getMessage
 } from './helpers';
 
-// const API_URL 			= 'https://127.0.0.1:5000/';
+const API_URL 			= 'https://vargasoff.ru:8000/';
 const VK_DATA 			= window.location.search;
 
 axios.defaults.headers.common = {
@@ -19,69 +19,47 @@ export default class API {
         dd('API: ', 'init');
     }
 
-    async send(type = 'GET', action, params = {}) {
+    async send(method = 'GET', action, data = {}) {
         if (!navigator.onLine) {
+            // TODO: Нужно просто сменить экран на оффлайн страничку
             // error internet connection
             return false;
         }
 
-        await sleep(1000);
+        const response = await axios({ 
+            method,
+            url: `${API_URL}${action}`,
+            data
+        }).catch(error => {
+            dd('Error API:', error);
+            window.showAlert(getMessage('server_offline'));
+        });
 
-        // const response = await axios({
-        //     method: type,
-        //     url: `${API_URL}${action}`,
-        //     data: { params }
-        // }).catch(error => {
-        //     dd('Error API:', error);
-        //     window.showAlert(getMessage('server_offline'));
-        // });
-
-        // return response;
+        return response ? response.data : [];
     }
 
     async AddMeet(meet) {
-
         const response = {
             success: true,
             failed: "test test"
         }
 
         dd('API: ', 'AddMeet', response);
-        await this.send('POST', 'AddMeet', meet);
-        // return await this.send('POST', 'AddMeet', meet);
+
+        // const response = await this.send('POST', 'AddMeet', meet);
+
         return response;
     }
 
+    /**
+     * Получить список митиног
+     * @return array
+     */
     async GetMeets() {
-        const meets = [{
-            id: 1,
-            name: 'Meet name 1',
-            description: 'Meet description 1',
-            ownerid: 1,
-            members_amount: 1,
-            start: 123123123,
-            finish: 321321321
-        },{
-            id: 2,
-            name: 'Meet name 2',
-            description: 'Meet description 2',
-            ownerid: 1,
-            members_amount: 1,
-            start: 123123123,
-            finish: 321321321
-        },{
-            id: 3,
-            name: 'Meet name 3',
-            description: 'Meet description 3',
-            ownerid: 1,
-            members_amount: 1,
-            start: 123123123,
-            finish: 321321321
-        }];
-
-        await this.send();
+        const meets = await this.send('GET', 'GetMeets');
 
         dd('API: ', 'GetMeets', meets);
+
         return meets;
     }
 
@@ -94,25 +72,25 @@ export default class API {
     async AddComment() {}
 
     async GetMeetComments() {
-    const comments = [
-        {
-            "id": 1,
-            "comment": "Комментарий 1",
-            "ownerid": 1,
-            "meetingid": 1
-        },
-        {
-            "id": 2,
-            "comment": "Комментарий 2",
-            "ownerid": 12,
-            "meetingid": 1
-        },
-        {
-            "id": 3,
-            "comment": "Комментарий 3",
-            "ownerid": 13,
-            "meetingid": 1
-        }
+        const comments = [
+            {
+                "id": 1,
+                "comment": "Комментарий 1",
+                "ownerid": 1,
+                "meetingid": 1
+            },
+            {
+                "id": 2,
+                "comment": "Комментарий 2",
+                "ownerid": 12,
+                "meetingid": 1
+            },
+            {
+                "id": 3,
+                "comment": "Комментарий 3",
+                "ownerid": 13,
+                "meetingid": 1
+            }
         ];
         
         await this.send();

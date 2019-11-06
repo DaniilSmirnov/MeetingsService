@@ -22,7 +22,7 @@ class Home extends Component {
         this.getMeets();
     }
 
-    getMeets = async (page, count, search) => {
+    getMeets = async () => {
         window.showLoader(true);
         const meets = await this.api.GetMeets();
 
